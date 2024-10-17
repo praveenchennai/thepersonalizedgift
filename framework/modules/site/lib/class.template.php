@@ -1,0 +1,105 @@
+<?php
+class Template extends FrameWork {
+  var $template_name;
+  var $template_desc;
+  var $template_folder;  
+  var $active;
+  function Template($template_name="",$template_desc="",$template_folder="",$active="") {
+	$this->template_name 	= 	$template_name;
+	$this->template_desc 	= 	$template_desc;
+	$this->template_folder	=	$template_folder;		
+	$this->active			=	$active;	
+	$this->FrameWork();
+  }	
+	/**
+	 *Listing All Templates and css
+	 *
+	 * return array
+	 */
+	function templateList ($pageNo, $limit = 10, $params='', $output=OBJECT, $orderBy) {
+		$sql	= 	"SELECT * 
+						FROM 
+							site_template 
+					WHERE 1";	
+		list($rs,$numpad) = $this->db->get_results_pagewise($sql, $pageNo, $limit, $params, $output, $orderBy);		
+		if($rs){
+			foreach ($rs as $key=>$row){		
+				$temp_id= $row->id;											
+				$rs[$key]->cssList= $this->getcssList($temp_id);									
+			}
+		}		
+		return array($rs);		
+	}
+	
+	/**
+	 *	Selecting All CSS under specified Template
+	 * @param <temp_id> $temp_id
+	 * return Array	 
+	 */
+	 function getcssList($temp_id){
+	 	$sql	=	"SELECT 
+							a.id as css_id,
+							a.* 
+						FROM site_css a 
+					WHERE a.template_id=$temp_id";		
+		$rs = $this->db->get_results($sql);	
+		return $rs;
+	 }
+	 /**
+	 *Listing All Templates and css
+	 *
+	 * return array
+	 */
+	function cssList ($pageNo, $limit = 10, $params='', $output=OBJECT, $orderBy) {
+		$sql	= 	"SELECT 
+							a.id as temp_id,
+							a.*,
+							b.* 
+						FROM site_template a,
+							site_css b 
+					WHERE a.id = b.template_id";	
+		$rs		= 	$this->db->get_results_pagewise($sql, $pageNo, $limit, $params, $output, $orderBy);		
+		return $rs;		
+	}
+	 /**
+	 *	getting CSS details based on given id
+	 *	@param <id> $id
+	 * 	return array
+	 */
+	 function getCss ($id) {
+	 	$query	=	"SELECT a.id as temp_id,
+							a.*,
+							b.* 
+						FROM site_template a,
+						site_css b
+					 WHERE a.id = b.template_id 
+					 	AND b.template_id='{$id}'";
+		$rs 	= 	$this->db->get_row($query, ARRAY_A);	
+		return $rs;
+	}
+	 /**
+	 *	Assigning CSS to specified subdomain
+	 *	@param <id,css_id> $site_id,$css_id
+	 * 	return array
+	 */
+	function assignCss($site_id,$temp_id){
+		$query	=	"UPDATE 
+						site 
+						SET template_id='$temp_id' 
+					WHERE id='$site_id'";		
+		$assign	=	$this->db->query($query);
+		if($assign){
+			return true;
+		}
+	}
+	 /**
+	 *	Getting SITE details by specified id
+	 *	@param <id> $id
+	 * 	return array
+	 */
+	function siteGet ($id) {
+		$rs = $this->db->get_row("SELECT * FROM site WHERE id='{$id}'", ARRAY_A);
+		return $rs;
+	}
+}
+?>

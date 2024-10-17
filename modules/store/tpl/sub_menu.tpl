@@ -1,0 +1,1 @@
+<li><a onclick="this.blur();" href="{makeLink mod="store" pg="index"}act=list{/makeLink}">Manage Store</a></li>

@@ -1,0 +1,1 @@
+<li><a onclick="this.blur();" href="{makeLink mod="category" pg="index"}act=list{/makeLink}">Manage Category</a></li>

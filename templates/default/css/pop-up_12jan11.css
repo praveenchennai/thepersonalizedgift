@@ -1,0 +1,32 @@
+/* CSS Document */
+
+.shadow{
+width:600px;
+height:540px;
+background:url(../images/shadow_new.png) no-repeat;
+padding:30px 40px 30px 30px;
+position:absolute;
+
+top:150px;
+}
+.container{
+width:515px;
+height:445px;
+border:1px solid #999999;
+}
+
+.close_bar{
+width:495px;
+height:29px;
+padding:3px 10px;
+background:#485E85;
+}
+
+.image_holder{
+width:475px;
+height:370px;
+padding:20px 20px;
+background:#fff;
+}
+
+.fr{ float:right;}

@@ -1,0 +1,7 @@
+AuthType Basic
+AuthName "/www/thepersonalizedgift.com/webstat"
+AuthUserFile /var/www/webadmin/data/etc/917526.passwd
+DirectoryIndex index.html
+<Limit GET POST>
+	require valid-user
+</Limit>

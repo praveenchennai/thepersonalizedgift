@@ -1,0 +1,203 @@
+
+
+
+.headerbox{
+width:952;
+height:281px;
+
+}
+.logo{
+width:218px;
+height:276px;
+background:url(../images/logo.jpg) no-repeat ;
+margin-top:0px;
+float:left;
+}
+.menubg{
+width:218px;
+height:182px;
+background:url(../images/topmenu-bg.jpg) no-repeat ;
+margin-top:98px;
+}
+.topmenu{
+position:relative;
+width:130px;
+top:42px;
+margin-left:80px;
+}
+.toplink{
+width:100px;
+height:22px;
+vertical-align:middle;
+margin-top:0px;
+padding-top:5px;
+
+}
+
+
+.lady{
+width:218px;
+height:281px;
+background:url(../images/lady.jpg) no-repeat ;
+margin-top:0px;
+position:relative;
+float:left;
+}
+.header-right{
+width:516px;
+height:281px;
+float:right;
+
+
+}
+.createpersonalizedgift{
+width:516px;
+height:65px;
+background:url(../images/creat-personalized-gifts.jpg) no-repeat ;
+margin-top:10px;
+float:right;
+}
+
+.welcomebox{
+width:500px;
+height:177px;
+margin-top:19px;
+margin-left:16px;
+background:url(../images/right-headercurve2.jpg) no-repeat ;
+float:right;
+position:relative;
+
+}
+
+.welcometext{
+width:300px;
+FONT-WEIGHT:normal;
+FONT-SIZE: 11px;
+COLOR: #0b5980;
+FONT-FAMILY:  Arial, Helvetica, sans-serif;
+TEXT-DECORATION: none;
+line-height: 15px;
+margin-top:5px;
+margin-left:10px;
+position:relative;
+float:left;
+}
+.loginbox{
+width:300px;
+height:80px;
+FONT-WEIGHT:normal;
+FONT-SIZE: 11px;
+FONT-FAMILY:  Arial, Helvetica, sans-serif;
+COLOR: #0b5980;
+margin-top:3px;
+margin-left:0px;
+float:left;
+
+}
+.go{
+width:23px;
+height:21px;
+float:left;
+position:relative;
+}
+
+.searchbox{
+width:140px;
+height:70px;
+FONT-WEIGHT:normal;
+margin-top:10px;
+FONT-SIZE: 11px;
+FONT-FAMILY:  Arial, Helvetica, sans-serif;
+COLOR: #0b5980;
+float:right;
+}
+.redtext {
+	FONT-WEIGHT: normal; 
+	FONT-SIZE: 11px; 
+	COLOR: #db1f1c; 
+	FONT-FAMILY: Arial; 
+	TEXT-DECORATION: none
+}
+.input{
+    border-right:#8f9296 1px solid;
+	border-left:#8f9296 1px solid;
+	border-top:#8f9296 1px solid;
+	border-bottom:#8f9296 1px solid; 
+	font-size:11px; 
+	color:#000000; 
+	font-family:  Arial, Helvetica, sans-serif; 
+	border-color:#a2a2a2;
+	background-color:#ffffff;  
+}
+.bodybox{
+width:100%;
+background:url(../images/bodytop-bg.jpg);
+background-repeat:repeat-x;
+}
+
+
+
+.productsgallery{
+width:680px;
+float:left;
+padding-left:15px;
+position:relative;
+text-align:left;
+margin-left:10px;
+
+}
+
+.home_product{
+float:left;
+width:310px;
+height:150px;
+FONT-WEIGHT:normal;
+FONT-SIZE: 11px;
+COLOR: #0b5980;
+FONT-FAMILY:  Arial, Helvetica, sans-serif;
+TEXT-DECORATION: none;
+line-height: 18px;
+position:relative;
+text-align:left;
+
+margin-right:25px;
+margin-bottom:10px;
+}
+.productname{
+float:left;
+width:165px;
+position:relative;
+text-align:left;
+
+}
+
+
+.photobox{
+float:left;
+width:165px;
+position:relative;
+text-align:left;
+}
+.phototext{
+float:right;
+width:115px;
+position:relative;
+text-align:left;
+margin-right:5px;
+
+}
+
+.rightcolumn{
+ float:right;
+ padding-top:10px;
+ width:190px;
+ padding-left:10px;
+ border-left: solid 0px #F7EFE2;
+ padding-right:10px;
+ text-align:left;
+ position:relative;
+ 
+}
+
+
+

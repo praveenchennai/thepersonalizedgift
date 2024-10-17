@@ -1,0 +1,21 @@
+
+
+saving XML into the table using the url:
+
+http://192.168.1.254/buildapaddle_new/index.php?mod=editor&pg=xml&act=save
+
+
+
+return the XML file: 
+http://192.168.1.254/buildapaddle_new/index.php?mod=editor&pg=xml&act=getxml
+
+
+
+
+url used for getting the category xml file:
+http://192.168.1.254/buildapaddle_new/index.php?mod=editor&pg=xml&act=clipart
+
+
+
+URL used for getting products under a particular category
+http://192.168.1.254/buildapaddle_new/index.php?mod=editor&pg=xml&act=prod&cid=88

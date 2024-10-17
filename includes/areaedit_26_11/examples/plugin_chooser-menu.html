@@ -1,0 +1,107 @@
+<html>
+<head>
+
+<!--------------------------------------------
+-- originally created by James Sleeman of Gogo Code.
+--
+-- Modified for use with AreaEdit.
+--
+-- This is a plugin chooser demo. It allows you to experiment
+-- with different combinations of plugins.
+---------------------------------------------->
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Plugin Chooser Example</title>
+  <link rel="stylesheet" href="examples.css" />
+  <style type="text/css">
+    label { display:block; }
+  </style>
+</head>
+
+<body>
+  <h1>Area Edit Plugin Chooser</h1>
+
+  <br>
+
+  <a target="_top" href="../index.html">Back to Index</a>
+
+  <p>
+    Select from the options below and click the Show Example button to show working examples
+    on the right.
+  </p>
+
+  <p>
+  Plugin's marked in <b>bold</b> have been modified. The rest are exactly as they were 
+  distributed with Xinha.
+  </p>
+
+  <form action="plugin_chooser-body.php" target="body">
+    <fieldset>
+      <legend>Plugins</legend>
+      <label>
+        <input type="checkbox" name="plugins" value="EnterParagraphs"  /> <b>EnterParagraphs</b>
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="CSS"  /> CSS
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="DynamicCSS"  /> DynamicCSS
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="FullPage"  /> FullPage
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="FullScreen" /> FullScreen
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="CharacterMap" /> CharacterMap
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="ContextMenu" checked /> ContextMenu
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="ListType" /> ListType
+      </label>
+
+      <label>
+        <input type="checkbox" name="plugins" value="Stylist" /> Stylist
+      </label>
+
+      <label>
+        <input type="checkbox" name="plugins" value="TableOperations" /> TableOperations
+      </label>
+
+      <label>
+        <input type="checkbox" name="plugins" value="InsertAnchor" /> InsertAnchor
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>PHP Plugins</legend>
+      <p>
+        These plugins require PHP in order to run.  Some may have versions in other languages.
+      </p>
+      <label>
+        <input type="checkbox" name="plugins" value="SuperClean"  />  SuperClean <small>(PHP)</small>
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="SpellChecker" /> SpellChecker <small>(PHP)</small>
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="HtmlTidy"  />    HtmlTidy <small>(PHP)</small>
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="Linker"  />       <b>Linker</b> <small>(PHP)</small>
+      </label>
+      <label>
+        <input type="checkbox" name="plugins" value="ImageManager"  />        <b>ImageManager</b> <small>(PHP)</small>
+      </label>
+    </fieldset>
+
+    <label>Number of Editors: <input type="text" name="num" value="1" /></label>
+
+    <input type="submit" value="Show Example" />
+  </form>
+
+</body>
+</html>

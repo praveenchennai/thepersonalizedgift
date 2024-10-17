@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# ------- to limit access to admin dir -------
+# RewriteCond %{REMOTE_HOST} !71\.254\.152\.66
+# RewriteCond %{REMOTE_HOST} !122\.166\.40\.177
+# RewriteCond %{REMOTE_HOST} !216\.154\.209\.42
+# RewriteRule (.*).php blank.html [L]
+# ------- to limit access to admin dir -------
+
+RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<risk-information-notification xmlns="http://checkout.google.com/schema/2" serial-number="330373460130237-00005-5">
+  <timestamp>2008-02-28T05:25:49.000Z</timestamp>
+  <google-order-number>330373460130237</google-order-number>
+  <risk-information>
+    <billing-address>
+      <contact-name>vinoy</contact-name>
+      <company-name></company-name>
+      <email>vinoy.jacob@gmail.com</email>
+      <phone></phone>
+      <fax></fax>
+      <address1>pavoor road,padivattom</address1>
+      <address2></address2>
+      <city>kochi</city>
+      <country-code>IN</country-code>
+      <region>KERALA</region>
+      <postal-code>686726</postal-code>
+    </billing-address>
+    <ip-address>122.166.40.177</ip-address>
+    <eligible-for-protection>true</eligible-for-protection>
+    <avs-response>Y</avs-response>
+    <cvn-response>M</cvn-response>
+    <partial-cc-number>1111</partial-cc-number>
+    <buyer-account-age>8</buyer-account-age>
+  </risk-information>
+</risk-information-notification>
+

@@ -1,0 +1,273 @@
+<?php
+ob_start();
+include_once("config.php");
+
+include_once(FRAMEWORK_PATH."/includes/functions.php");
+include_once(FRAMEWORK_PATH."/includes/class.framework.php");
+include_once(FRAMEWORK_PATH."/modules/product/lib/class.product.php");
+include_once(FRAMEWORK_PATH."/modules/category/lib/class.category.php");
+include_once(FRAMEWORK_PATH."/modules/store/lib/class.store.php");
+include_once(FRAMEWORK_PATH."/modules/cms/lib/class.cms.php");
+include_once(FRAMEWORK_PATH."/modules/cart/lib/class.cart.php");
+include_once(FRAMEWORK_PATH."/modules/store/lib/class.template.php");
+include_once(FRAMEWORK_PATH."/modules/member/lib/class.user.php");
+include_once(FRAMEWORK_PATH."/modules/product/lib/class.price.php");
+
+//print($_SERVER['QUERY_STRING']);
+
+session_start();
+ini_set("display_errors", "on");
+error_reporting(E_WARNING);
+$framework 	= 	new FrameWork();
+$objUser=new User();
+$objPrice		=	new Price();
+
+
+//echo 1;
+//print_r($_SESSION);
+$objUser->updateSession(); //updates the time as last time in session table
+
+if ($_REQUEST['sess']) {
+	parse_str(base64_decode($_REQUEST['sess']), $req);
+	$_REQUEST = array_merge($_REQUEST, $req);
+}
+
+if ($_SESSION["memberid"]) {	
+	$framework->tpl->assign("MEMBER", $objUser->getUserdetails($_SESSION["memberid"]));
+	$framework->tpl->assign("LASTLOGIN", $objUser->getLastSession($_SESSION["memberid"]));
+}
+#----- for redirecting to the store on 03-07-07 -------------
+include_once(FRAMEWORK_PATH."/modules/store/lib/class.storeredirect.php");
+$objRedir	=	new StoreRedirect();
+$domain	=	$_SERVER["HTTP_HOST"];
+$domainpath = $_SERVER['REQUEST_URI'];
+$domain_name1	= "http://www.".$domain;
+$domain_name2	= "http://".$domain;
+$domain_name3	= $domain;
+$domain_name4	= str_replace("www.","",$domain);
+$redirectStorename	=	$objRedir->GetStorenameforRedirect($domain_name1);
+if($redirectStorename=="")
+{
+	$redirectStorename	=	$objRedir->GetStorenameforRedirect($domain_name2);
+}
+if($redirectStorename=="")
+{
+	$redirectStorename	=	$objRedir->GetStorenameforRedirect($domain_name3);
+}
+/*if($redirectStorename=="")
+{
+$redirectStorename	=	$objRedir->GetStorenameforRedirect($domain_name4);
+}*/
+
+//print($domain);exit;
+
+
+if($redirectStorename!="" && $domainpath=="/")
+{
+	$NewDomain=str_replace("www.","",$domain_name2);
+	$redirectURL	=	SITE_URL."/".$redirectStorename."/";
+	//$redirectURL	=	$domain_name2."/".$redirectStorename;
+	//$redirectURL	=	$NewDomain."/".$redirectStorename;
+	header("Location: $redirectURL");
+}
+
+
+$objStore 			= 	new Store();
+$objCss 			= 	new Template();
+$global 				= $framework->config;
+$storename	=	$_REQUEST['storename'] 	? 	$_REQUEST['storename'] 	: 	 "";
+$storeDetails			=	$objStore->storeGetByName1($storename);
+$store_name = $storename;
+$store_id				=	$storeDetails['id'];
+$payment_owner			=	$storeDetails['payment_receiver'];
+$cssDetails				=	$objCss->getCss($storeDetails['template_id']);
+//print_r($cssDetails	);
+
+if($cssDetails['css_name']){
+	$css_name			= 	$cssDetails['css_name'];
+}else{
+	$css_name			= 	"style.css";
+}
+if($cssDetails['template_folder']){
+	$global['curr_tpl']	= $cssDetails['template_folder'];
+}
+$global['store_id']		= $store_id;
+if($store_id){
+	$framework->tpl->assign("PAYMENT_OWNER",$payment_owner);
+}	
+$global["tpl_url"] 		= SITE_URL."/templates/".$global['curr_tpl'];
+$global["mod_url"] 		= SITE_URL."/modules/".$_REQUEST['mod'];
+$global["sslsite_url"] 		= SSL_SITE_URL."/templates/".$global['curr_tpl'];
+$global["modbase_url"] 	= SITE_URL."/modules/";
+$global["ssl_url"] 	= SSL_SITE_URL."/modules/";
+$global["sslsiteretrn_url"] 		= SSL_SITE_URL;
+
+
+//=========This code is added  for getting / after storename=========
+
+$domainpath = $_SERVER['REQUEST_URI'];
+$domain_name1	="http://www.".$domain;
+$domain_name2	="http://".$domain;
+$rest1 = substr("$domainpath", -1);
+$str = $_SERVER['QUERY_STRING'];
+$str=substr($str,0,3);
+//echo $domainpath;
+$checkSplit	=	explode("/",$domainpath);
+$rootURL	=	$checkSplit[count($checkSplit)-1];
+if($rest1 != '/' && $str!='mod' && $_REQUEST['mod']=='' && $rootURL!='index.php')
+{
+
+
+	$domain1=$domain_name2.$domainpath.'/';
+	//echo $domain1;
+	header("Location: $domain1");
+}
+//====================================================================
+
+$framework->tpl->assign("GLOBAL", $global);
+
+$mod 		= 	$_REQUEST['mod'] 		? 	$_REQUEST['mod'] 		: 	"";
+$pg  		=	$_REQUEST['pg'] 		? 	$_REQUEST['pg'] 		: 	"default";
+$storename	=	$_REQUEST['storename'] 	? 	$_REQUEST['storename'] 	: 	 "";
+
+if($mod=="product" && $pg=="list" && $_REQUEST['act']=="desc")
+	$product_id	=	$_REQUEST['id'];
+if($mod && $pg)
+	$no_right_column=6;
+else
+	$no_right_column=8;
+########Featured items
+$FeaturedProducts	=	new Product();
+$rs = $FeaturedProducts->GetFeaturedItems('');
+		for($i=0;$i<6;$i++){
+		$rs[$i]['discount_price'] = $objPrice->GetPriceOfProduct($rs[$i]['id']);
+		}
+//print_r($rs);
+$framework->tpl->assign("FEATURED_ITEMS",$rs);
+######################
+if(count($rs[0]['data'])>0)
+$num_rows=ceil((count($rs[0]['data']))/2);
+if($num_rows==""){
+	$num_rows=3;
+}
+$framework->tpl->assign("DEFAULT_ROWS",$num_rows);		
+/*set_time_limit(0);
+ini_set("display_errors", "on");
+error_reporting(E_ALL);
+$FeaturedProducts->AllProduct();*/
+
+		/**/
+//$framework->tpl->assign("FEATURED_TITLE", $FeaturedProducts->GetFeaturedTitle());
+//$rs	=	$FeaturedProducts->GetFeaturedItems($storename);
+//$framework->tpl->assign("FEATURED_ITEMS",$rs);
+//Featured items ends
+
+// ---  Menu ---
+$objCategory = new Category();
+$objCategory->getCategoryMenuTree($catTree,$storename);
+
+$framework->tpl->assign("CAT_MENU", substr($catTree, 0, -2));
+
+$objCms = new Cms();
+
+//global variable for getting full path from cms
+$global['fullpath']=1;
+
+if($storename=="")#if no store is present
+	{
+		$framework->tpl->assign("TOP_MENU", $objCms->linkList("top")); 
+		$framework->tpl->assign("LEFT_SUB_MENU1", $objCms->linkList("left_sub1","",1));
+		$framework->tpl->assign("LEFT_SUB_MENU2", $objCms->linkList("left_sub2","",1));
+		$framework->tpl->assign("LEFT_MENU", $objCms->linkList("left","",1));
+		$framework->tpl->assign("BOTTOM_MENU", $objCms->linkList("bottom","",1));
+		$framework->tpl->assign("BOTTOM_SUB_MENU", $objCms->linkList("bottomsub","",1));
+		$framework->tpl->assign("DATE", $date = date("l M j, Y"));
+		$framework->tpl->assign("WELCOME_MESSAGE", $objCms->GetCMSpageById(21));
+		$framework->tpl->assign("INNER_TOP_MENU", $objCms->linkList("inner_top_menu","",1)); 
+		$_SESSION['ADD_STORE_URL']="";
+	}
+	else#if some store is present
+	{
+	$domainpath = $_SERVER['REQUEST_URI'];
+	$checkSplit	=	explode("/",$domainpath);
+	
+	if($checkSplit[2]!=$storename)
+	{
+		
+		$framework->tpl->assign("TOP_MENU", $objCms->linkList("store_top",$storename)); 
+		$framework->tpl->assign("LEFT_SUB_MENU1", $objCms->linkList("store_left_sub1",$storename));
+		$framework->tpl->assign("LEFT_SUB_MENU2", $objCms->linkList("store_left_sub2",$storename));
+		#$framework->tpl->assign("LEFT_MENU", $objCms->linkList("left"));
+		#$framework->tpl->assign("BOTTOM_MENU", $objCms->linkList("bottom"));
+		#$framework->tpl->assign("BOTTOM_SUB_MENU", $objCms->linkList("bottomsub"));
+		#$framework->tpl->assign("INNER_TOP_MENU", $objCms->linkList("inner_top_menu")); 
+		$framework->tpl->assign("BOTTOM_MENU", $objCms->linkList("store_bottom",$storename));
+		$framework->tpl->assign("WELCOME_MESSAGE_STORE", $storeDetails);
+		$framework->tpl->assign("INNER_TOP_MENU", $objCms->linkList("store_inner_top_menu",$storename)); 
+		$framework->tpl->assign("STOREFLAG", 'Y'); 
+		$framework->tpl->assign("STORE_NAME", $storename); 
+		$_SESSION['ADD_STORE_URL']=$storename;
+		
+	}else
+	{
+		//print_r($objCms->linkList("store_top"));
+		$framework->tpl->assign("TOP_MENU", $objCms->linkList("store_top")); 
+		$framework->tpl->assign("LEFT_SUB_MENU1", $objCms->linkList("store_left_sub1"));
+		$framework->tpl->assign("LEFT_SUB_MENU2", $objCms->linkList("store_left_sub2"));
+		#$framework->tpl->assign("LEFT_MENU", $objCms->linkList("left"));
+		#$framework->tpl->assign("BOTTOM_MENU", $objCms->linkList("bottom"));
+		#$framework->tpl->assign("BOTTOM_SUB_MENU", $objCms->linkList("bottomsub"));
+		#$framework->tpl->assign("INNER_TOP_MENU", $objCms->linkList("inner_top_menu")); 
+		$framework->tpl->assign("BOTTOM_MENU", $objCms->linkList("store_bottom"));
+		$framework->tpl->assign("WELCOME_MESSAGE_STORE", $storeDetails);
+		$framework->tpl->assign("INNER_TOP_MENU", $objCms->linkList("store_inner_top_menu")); 
+		$framework->tpl->assign("STOREFLAG", 'Y'); 
+	}
+	
+	
+	
+	}
+// --- /Menu ---
+//print_r($objCms->linkList("left_sub1"));
+// ---  Shops ---
+ 
+$framework->tpl->assign("STORE_COMBO", $objStore->storeCombo());
+// --- /Shops ---
+
+// ---  Cart ---
+$objCart = new Cart();
+$framework->tpl->assign("CART_BOX", $objCart->getCartBox());
+// --- /Cart ---
+if($mod == "admin") {
+	redirect(SITE_URL);
+}
+
+//for store by  robin
+$framework->tpl->assign("MENU_ALIGN",$global['menu_style']); 
+if ( $_REQUEST['mod'] == "store" )  {
+  $mod_Rep = explode ("_", $_REQUEST['pg'] );
+  $framework->tpl->assign("MOD_REP", $mod_Rep[0]);
+} else {
+  $framework->tpl->assign("MOD_REP", $_REQUEST['mod']);
+}
+
+// end store
+if ($_REQUEST['storename'] && $_REQUEST['manage'] == "manage" && $mod!="store") {
+	redirect(SITE_URL."/".$_REQUEST['storename']."/manage/".makeLink(array("mod"=>"store", "pg"=>"storeIndex"), ""));
+}
+
+$file = FRAMEWORK_PATH."/modules/{$mod}/lib/{$pg}.php";
+
+//print $file;
+
+if(file_exists($file)) {
+	include_once($file);
+} else {
+	$framework->tpl->display($global['curr_tpl']."/index_div.tpl");
+}
+//echo "<pre>";
+//print_r($_SESSION);
+//print_r($global);
+
+if(strstr(SITE_URL, "192"))echo base64_decode($_REQUEST['sess']);
+?>

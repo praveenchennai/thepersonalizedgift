@@ -1,0 +1,83 @@
+<?php
+
+class Email extends FrameWork {
+
+	function Email() {
+		$this->FrameWork();
+	}
+
+	function generalList ($pageNo, $limit=10, $params='', $output=OBJECT, $orderBy) {
+	
+		$sql		= "SELECT * FROM email_config  where bit_type='1'";
+
+		$rs = $this->db->get_results_pagewise($sql, $pageNo, $limit, $params, $output, $orderBy);
+		return $rs;
+	}
+	//==========================
+	function messageList ($pageNo, $limit = 10, $params='', $output=OBJECT, $orderBy) {
+		$sql		= "SELECT * FROM email_config where bit_type='2'";
+
+		$rs = $this->db->get_results_pagewise($sql, $pageNo, $limit, $params, $output, $orderBy);
+		return $rs;
+	}
+	
+   //============================
+	function generalEdit (&$req) {
+
+		extract($req);
+
+		if(!trim($subject)) {
+			$message = "Email Subject is required";
+		} elseif (!trim($body)) {
+			$message = "Email Body is required";
+		} else {
+			$array = array("subject"=>$subject, "body"=>$body);
+			$this->db->update("email_config", $array, "id='$id'");
+			return true;
+		}
+		return $message;
+	}
+	function generalEditMsg (&$req) {
+
+		extract($req);
+		if(!trim($subject)) {
+			$message = "Message Subject is required";
+		}elseif (!trim($body)) {
+			$message = "Message Body is required";
+		} else {
+				$array = array("subject"=>$subject, "body"=>$body);
+				$this->db->update("email_config", $array, "id='$id'");
+				return true;
+		}
+		return $message;
+	}
+	
+	function generalGet ($id) {
+		$sql		= "SELECT * FROM email_config WHERE id = '$id'";
+
+		$rs = $this->db->get_row($sql, ARRAY_A);
+		return $rs;
+	}
+	
+	function generalGetByName($name=''){	
+		$sql		= "SELECT * FROM email_config WHERE name = '$name'";			
+		$rs = $this->db->get_row($sql, ARRAY_A);
+		return $rs;
+	}
+	
+	function send($email_name, $email_header, $dynamic_vars) {	
+		$rs = $this->generalGetByName($email_name);					
+		$subject = $rs['subject'];
+		$body	 = $rs['body'];
+		if (is_array($dynamic_vars)) {
+			foreach ($dynamic_vars as $key=>$val) {
+				$body = str_replace("%_{$key}_%", $val, $body);
+				$subject = str_replace("%_{$key}_%", $val, $subject);
+			}			
+		}		
+		return mimeMail($email_header['to'], $subject, $body, strip_tags($body), '', $email_header['from']);
+	}
+
+}
+
+?>

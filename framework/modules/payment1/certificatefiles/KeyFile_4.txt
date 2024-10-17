@@ -1,0 +1,52 @@
+04-23-2007
+**********
+ALTER TABLE `products` ADD `image_area_height` INT AFTER `y_co` ,
+ADD `image_area_width` INT AFTER `image_area_height` ;
+
+
+INSERT INTO `module_fields` ( `id` , `menu_id` , `name` , `description` , `display_order` , `active` )
+VALUES (
+'', '20', 'Image Area Height', NULL , NULL , 'Y'
+), (
+'', '20', 'Image Area Width', NULL , NULL , 'Y'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE `module_fields` SET `description` = NULL ,
+`display_order` = '1o' WHERE `id` =55 AND `menu_id` =26 LIMIT 1 ;
+
+UPDATE `module_fields` SET `description` = NULL ,
+`display_order` = '1p' WHERE `id` =83 AND `menu_id` =26 LIMIT 1 ;
+
+
+INSERT INTO `module_fields` ( `id` , `menu_id` , `name` , `description` , `display_order` , `active` )
+VALUES (
+'', '26', 'Color1', NULL , '1l', 'Y'
+), (
+'', '26', 'Color2', NULL , '1m', 'Y'
+);
+
+
+INSERT INTO `module_fields` ( `id` , `menu_id` , `name` , `description` , `display_order` , `active` )
+VALUES (
+'', '26', 'Color3', NULL , '1n', 'Y'
+);
+
+
+ALTER TABLE `product_accessories` ADD `color1` VARCHAR( 10 ) AFTER `html_desc` ,
+ADD `color2` VARCHAR( 10 ) AFTER `color1` ,
+ADD `color3` VARCHAR( 10 ) AFTER `color2` ;

@@ -1,0 +1,168 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]
+
+RewriteCond %{HTTP_HOST}   ^creativenamesgifts.link54.com [NC]
+RewriteCond %{HTTP_HOST}   !^$
+RewriteRule ^/(.*)         http://creativenamesgifts.link54.com/$1 [L,R]
+
+###### Added by Anish ########
+RewriteCond %{HTTP_HOST} ^creativenamesgifts.link54.com$
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+
+RewriteRule             (^([a-z0-9]*)/)?([^/-]+)-?([0-9]*).php          index.php?mod=cms&pg=display&storename=$2&data=$3&pageNo=$4             [L]
+
+
+## RewriteRule  ^$  creativenamesgifts/index.php [L]
+## RewriteRule ^(.*)$ creativenamesgifts\/index.php [L]
+###### Commented by Anish #######
+
+php_flag magic_quotes_gpc on
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+
+RewriteRule             (^([a-z0-9]*)/)?([^/-]+)-?([0-9]*).php          index.php?mod=cms&pg=display&storename=$2&data=$3&pageNo=$4             [L]
+
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+
+RewriteRule             (^([a-z0-9]*)/)?([^/-]+)-?([0-9]*).htm          index.php?mod=product&pg=list&act=listproduct&storename=$2&seo_name=$3          [L]
+
+
+
+### modified from here ##
+RewriteCond %{REQUEST_URI} !manage.*
+RewriteCond %{REQUEST_URI} !admin.*
+RewriteCond %{REQUEST_URI} !templates.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !scripts.*
+RewriteCond %{REQUEST_URI} !install.*
+RewriteCond %{REQUEST_URI} !modules.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+#RewriteCond %{REQUEST_FILENAME} !.php.*
+RewriteCond %{REQUEST_FILENAME} !.pdg.*
+
+RewriteRule  ^([A-Za-z0-9_-]*).cat$   index.php?mod=product&pg=list&act=pg_list&data=$1 [L]
+#RewriteRule ([A-Za-z0-9_-]+).cat   index.php?mod=product&pg=list&act=pg_list&data=$1 [L]
+
+RewriteCond %{REQUEST_URI} !manage.*
+RewriteCond %{REQUEST_URI} !admin.*
+RewriteCond %{REQUEST_URI} !templates.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !scripts.*
+RewriteCond %{REQUEST_URI} !install.*
+RewriteCond %{REQUEST_URI} !modules.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+#RewriteCond %{REQUEST_FILENAME} !.php.*
+#RewriteCond %{REQUEST_FILENAME} !.pdg.
+
+RewriteRule ^([A-Za-z0-9_-]*)/([A-Za-z0-9_-]*).cat  index.php?mod=product&pg=list&act=pg_list&data=$2&storename=$1 [L]
+
+
+RewriteCond %{REQUEST_URI} !manage.*
+RewriteCond %{REQUEST_URI} !admin.*
+RewriteCond %{REQUEST_URI} !templates.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !scripts.*
+RewriteCond %{REQUEST_URI} !install.*
+RewriteCond %{REQUEST_URI} !modules.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+#RewriteCond %{REQUEST_FILENAME} !.php.*
+RewriteCond %{REQUEST_FILENAME} !.cat.*
+RewriteRule ^([A-Za-z0-9_-]*)/([A-Za-z0-9_-]+).([0-9]*)$    index.php?mod=product&pg=list&act=pg_details_product&data1=$1&data2=$2&data3=$3 [L]
+
+
+RewriteCond %{REQUEST_URI} !manage.*
+RewriteCond %{REQUEST_URI} !admin.*
+RewriteCond %{REQUEST_URI} !templates.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !scripts.*
+RewriteCond %{REQUEST_URI} !install.*
+RewriteCond %{REQUEST_URI} !modules.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteCond %{REQUEST_URI} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+#RewriteCond %{REQUEST_FILENAME} !.php.*
+RewriteCond %{REQUEST_FILENAME} !.cat.*
+RewriteRule ^([A-Za-z0-9_-]*)/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+).([0-9]*)$    index.php?mod=product&pg=list&act=pg_details_product&data1=$2&data2=$3&data3=$4&storename=$1 [L]
+
+
+#RewriteRule ^([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+).([0-9])$    index.php?mod=product&pg=list&act=pg_details_product&data1=$2&data2=$3&data3=$4 [L]
+
+
+RewriteCond %{REQUEST_URI} !index.php.*
+#RewriteRule            (setup) index.php?mod=member&pg=register&act=add_edit&retailer=1 [L]
+#RewriteRule            (setup) index.php?mod=member&pg=signup&act=retailar_reg&retailer=1 [L]
+RewriteRule                     (setup) index.php?mod=member&pg=signup&act=retailar_reg&retailer=1 [L]
+#RewriteRule                    (setup_nopaypal)index.php?mod=member&pg=register&act=re_reg [L]
+
+
+
+RewriteCond %{REQUEST_URI} !index.php.*
+RewriteRule             (retailar)      index.php?mod=member&pg=register&act=retailar_reg&retailer=1 [L]
+
+RewriteRule             (signup_nopaypal)       index.php?mod=member&pg=register&act=re_reg [L]
+
+
+#RewriteCond %{REQUEST_URI} manage.*
+RewriteCond %{REQUEST_URI} !admin.*
+RewriteCond %{REQUEST_URI} !templates.*
+RewriteCond %{REQUEST_URI} !cron.*
+RewriteCond %{REQUEST_URI} !includes.*
+RewriteCond %{REQUEST_URI} !scripts.*
+RewriteCond %{REQUEST_URI} !install.*
+RewriteCond %{REQUEST_URI} !modules.*
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !index.php.*
+RewriteCond %{REQUEST_FILENAME} !index2.php.*
+RewriteCond %{REQUEST_FILENAME} !info.php.*
+RewriteCond %{REQUEST_URI} !blog.*
+RewriteCond %{REQUEST_FILENAME} !.cat.*
+RewriteCond %{REQUEST_FILENAME} !.pdg.*
+#RewriteCond %{REQUEST_URI} ![0-9]
+#RewriteCond %{REQUEST_URI} ![a-zA-Z]
+#RewriteCond %{REQUEST_FILENAME} !.php.*
+RewriteCond %{REQUEST_FILENAME} !^/var/www/html/thepersonalizedgift/$
+RewriteCond %{REQUEST_FILENAME} !^/var/www/html/thepersonalizedgift$
+
+RewriteRule             ([^/]+)/?(manage)?              index.php?%{QUERY_STRING}&storename=$1&manage=$2                [L]
+
+
+
+

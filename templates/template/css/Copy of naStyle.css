@@ -1,0 +1,292 @@
+body {
+	font-family: Verdana;
+	font-size: 10px;
+	color: #000000;
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+td, input, select, textarea {
+	font-family: Verdana;
+	font-size: 10px;
+	color: #000000;
+}
+input, select, textarea {
+	border:1px inset #cccccc;
+}
+
+/* footer color*/
+.naFooter {
+	font-family: Verdana;
+	font-size: 10px;
+	color: #FFFFFF;
+	background-color: #485e85;
+	text-decoration: none;
+}
+.naH1 {
+	font-family: "Trebuchet MS";
+	font-size: 18px;
+	color: #263a5d;
+	background-image:url('../images/grid/icons.gif');
+	background-repeat:no-repeat;
+	background-position:left;
+	padding-left:30;	
+}
+.naWhite {
+	background-color: #FFFFFF;
+}
+.naBtn {
+	border:1px solid #666666;
+	background-image:url('../images/buttons_bg.jpg');	
+	height:20px;
+	font:10px Verdana bold;
+	color: #000000;
+}
+.naBrdr {
+	border: 1px dashed #AAAAAA;
+}
+.naError {
+	font-weight: bold;
+	color: #FF0000;
+}
+.naSubTitle {
+	font-family: Verdana;
+	font-size: 10px;
+	color: #333333;
+	text-decoration: none;
+	background-color: #B1D2F8;
+	font-weight: bold;
+	border-bottom:1px dashed #000000;
+}
+.naSubTitle:link, .naSubTitle:visited {
+	border-bottom:0px;
+}
+.naGrid1 {
+	background-color: #e5e5e5;
+}
+.naGrid2 {
+	background-color: #eeeeee;
+}
+/* table heading     */
+.naGridTitle, .naGridTitle td {
+	font-family: Verdana;
+	font-size: 10px;
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #485e85;
+	font-weight: bold;
+}
+.naGridTitle a {
+	color:#FFFFFF;
+	text-decoration: none;
+}
+.naGridTitle a:hover {
+	color:#FFFFFF;
+	text-decoration:underline;
+}
+.naError {
+	font-weight: bold;
+	color: #FF0000;
+}
+.naMenu {
+	display:block;
+	color:#FFFFFF;
+	padding:5px;
+	text-decoration:none;
+	font-weight: bold;
+}
+.naMenu:hover {
+	color:#EEEEFF;
+	background-color:#6699FF;
+}
+#topbar * {
+    vertical-align: middle;
+}
+.naBoldTxt,
+a,
+#topbar a,
+#topbar a:link,
+#topbar a:visited {
+    font-weight: bold;
+    color: #263a5d;
+    text-decoration: none;
+}
+a:hover,
+#topbar a:hover {
+    color: #525d70;
+    text-decoration: underline;
+}
+#supplementalNav {
+    float: right;
+    background: transparent;
+    height:20px;
+}
+.screen {
+	border: 1px solid #ddd;
+	text-align: center;
+}
+a img {
+	border: 0;
+}
+
+.even {
+	background: #D9E7C2;
+}
+
+.odd {
+	background: #fff;
+}
+
+
+.disabledImage {
+    width: 20px;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.disabledImage img {
+    border: 0;
+}
+
+
+.grid {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid silver;}
+
+.gridHeader {
+    color: #fff;
+    font-weight: bold;
+    background-color: #8FC70C;
+    height: 25px;
+    border: 1px solid #006400; }
+
+.gridItem {
+    background-color: #fff;
+    padding: 3px; }
+
+.gridAltItem {
+    background-color: #eeeeee;
+    padding: 3px; }
+
+.gridRowIcon:hover {
+    background-color: #f5f5dc;
+}
+
+
+#topMenu {
+    background: #e4e4e4 url(../images/menubg.jpg);
+	background-repeat:repeat-x;
+}
+
+ul#nav {
+    margin: 0;
+    padding: 0;
+    padding-left: 10;
+    height: 25px;
+    width: 99%;
+    position: absolute;
+    top: 28px;
+    overflow: visible !important;
+}
+
+#nav ul {
+    display: none;
+    height: 25px;
+    position: relative;
+    z-index: 500;
+    margin: 0 0 0 -10px;
+    padding: 0 0 0 10px;
+}
+
+#nav li {
+    list-style: none;
+    background: #d4d4d4 url(../images/greentab.gif) 100% 100%;
+    float: left;
+    width: auto;
+    margin: 0 3px 0 0;
+    padding: 0;
+    }
+
+#nav li a {
+    color: #ffffff;
+    height: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    line-height: 25px;
+    overflow: hidden;
+    padding: 0 15px;
+    border-left: 1px solid #7e0415; /*c1e079*/
+    float: none !important;
+    float: left;
+    display: block;
+}
+
+#nav li ul li a {
+    background: #d4d4d4;
+    float: left;
+    width: auto;
+}
+
+#nav a:hover {
+    color: #e5e5e5; /* 9ebc5a */
+}
+
+#nav a:active {
+   color: #fff;
+}
+
+#nav li.active  {
+	background: #438d29 url(../images/greentab.gif) 100% 0;
+}
+
+#nav li.active a {
+    color: #fff;
+    position: relative;
+    z-index: 999999;
+    border-left: 1px solid #2e3752;
+    border-bottom: 1px solid #2e3752;
+}
+
+#nav li.active a:hover {
+    cursor: pointer;
+}
+
+#nav li.active ul.subnav {
+    display: block;
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    left: 0;
+    background: #2E3752; /* aacb34 */
+    border-top: 1px solid #263a5d;
+    border-bottom: 1px solid #263a5d;
+}
+
+.subnav,
+#nav li.active ul.subnav a {
+    color: #fff;
+    font-weight: normal;
+    border: none;
+    background: #2E3752;
+    cursor: pointer;
+
+}
+
+#nav li.active ul.subnav li {
+    margin: 0;
+}
+
+#nav li.active ul.subnav a:hover {
+    color: #cbdbf9; /* 9ebc5a */
+    /* background-color: #a5d535; */
+}
+
+#nav li.active ul.subnav a:active {
+    color: #ffffff;
+}
+
+
+
+
