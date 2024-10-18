@@ -1196,7 +1196,7 @@ function createImagebutton_Div($text,$href='#',$onclick='')
 {
 	global $global;
 
-	console.log('test');
+	
 	$msg='<div>
 				 <div style="float:left; "><img src="'.$global["tpl_url"].'/images/buttons/left.jpg" width="8" height="23"></div>
 					<div class="button_mid"><a href="'.$href.'" class="button_hrf_class"';
@@ -1205,7 +1205,6 @@ function createImagebutton_Div($text,$href='#',$onclick='')
 	$msg.='>'.$text.'</a></div>
 					<div style="float:left; "><img src="'.$global["tpl_url"] .'/images/buttons/right.jpg" width="8" height="23"></div>
 				  </div>';
-
 	return $msg;
 }
 function createImagebutton($text,$href='#',$onclick='')
