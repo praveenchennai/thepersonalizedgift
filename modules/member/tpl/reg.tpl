@@ -5,11 +5,8 @@
 {literal}
 	<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
 		function submit_form() {
-			console.log('Document Testing', document.getElementById('frmReg').action);
-			console.log('Get Elements', document.getElementById('frmReg'));
-
 			if (checkLength()) {
-
+				console.log('Get Elements', document.frmReg.username.value);
 				document.frmReg.submit();
 			}
 		}

@@ -294,10 +294,13 @@ if ($mode=="insert")
 	{
 
 		$rs=$this->db->query("select * from $table_name");
+		
 		$arr=$this->db->col_info;
+		print_r($arr);
 		for($i=0;$i<sizeof($arr);$i++)
 		{
 			$key=$arr[$i]->name;
+			
 			$value=$arr[$i]->name;
 			if(isset($arr_master[0][$value]))
 			{
@@ -306,6 +309,7 @@ if ($mode=="insert")
 			}
 		}
 		$arr_master[2]=$arr_addr;
+		
 		return $arr_master;
 	}
 

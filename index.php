@@ -491,6 +491,7 @@ if(file_exists($file)) {
 //echo "<pre>";
 //print_r($_SESSION);
 //print_r($global);
+
 if(strstr(SITE_URL, "192"))echo base64_decode($_REQUEST['sess']);
 ?>
 

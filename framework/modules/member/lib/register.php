@@ -50,7 +50,6 @@ $framework->tpl->assign("MEM_TYPE",$objUser->loadMemTypeCmb("0,3"));
 switch($_REQUEST['act']) {
 
 	case "add_edit":
-		console.log($_REQUEST["pg_type"]);
 		if(isset($_REQUEST["pg_type"])){
 			if($_REQUEST["pg_type"]=="church"){
 				if ((isset($_SESSION["mem_type"])) && ($_SESSION["mem_type"]!="church"))
@@ -573,6 +572,7 @@ switch($_REQUEST['act']) {
 		if($global["mem_type"] == 1){
 			$framework->tpl->assign("MEMB_TYPE", $objUser->getmem_type());
 		}
+		// print_r($_POST);
 		
 		if($_REQUEST['retailer']==1)
 		{
