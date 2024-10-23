@@ -32,11 +32,10 @@ class User extends FrameWork
 	}
 
 
-	function getCountryName1($id)
-	{
+	function getCountryName1($id){
 	
-	$sql="SELECT countryname from country_master where country_id=".$id;
-	$RS = $this->db->get_row($sql);
+		$sql="SELECT countryname from country_master where country_id=".$id;
+		$RS = $this->db->get_row($sql);
 	}
 
 	/**
@@ -45,8 +44,7 @@ class User extends FrameWork
   	 * Created  : 14/Aug/2006
   	 * Modified : 25/Sep/2007 By Retheesh
   	 */
-	function changePassword($old_pass,$new_pass,$uid)
-	{
+	function changePassword($old_pass,$new_pass,$uid){
 		$sql = "select * from member_master where id=$uid and password='$old_pass'";
 		$rs  = $this->db->get_row($sql);
 		if(count($rs)>0)
@@ -165,7 +163,7 @@ class User extends FrameWork
 					}	 
 			 }
           ////////////////////////////for checking if screen_name already exists
-if ($mode=="insert")
+		if ($mode=="insert")
 			{
 
 				if ($this->config['member_screen_name']=='Y')
@@ -296,7 +294,6 @@ if ($mode=="insert")
 		$rs=$this->db->query("select * from $table_name");
 		
 		$arr=$this->db->col_info;
-		print_r($arr);
 		for($i=0;$i<sizeof($arr);$i++)
 		{
 			$key=$arr[$i]->name;
@@ -308,6 +305,7 @@ if ($mode=="insert")
 				unset($arr_master[0][$value]);
 			}
 		}
+		
 		$arr_master[2]=$arr_addr;
 		
 		return $arr_master;
@@ -342,9 +340,20 @@ if ($mode=="insert")
 			$arr_shipping["mobile"] = $arr_master[2]["mobile"];
 			unset($arr_master[0]["shipping_address1"],$arr_master[0]["shipping_address2"],$arr_master[0]["shipping_city"],$arr_master[0]["shipping_state"],$arr_master[0]["shipping_postalcode"]);
 		}
-		
+
+		$membermaster['username'] = $arr_master[0]["username"];
+		$membermaster['password'] = $arr_master[0]["password"];
+
+		$membermaster['first_name'] = $arr_master[0]["first_name"];
+		$membermaster['last_name'] = $arr_master[0]["last_name"];
+
+		$membermaster['email'] = $arr_master[0]["email"];
+		$membermaster['joindate'] = $arr_master[0]["joindate"];
+		$membermaster['from_store'] = $arr_master[0]["from_store"];
+
+		print_r($membermaster);
 	
-		$this->db->insert("member_master", $arr_master[0]);
+		$this->db->insert("member_master", $membermaster);
 
 		$id = $this->db->insert_id;
 		$arr_master[1]["table_key"]=$id;
@@ -556,10 +565,9 @@ if ($mode=="insert")
 	
 	
 	
-	function drawuserDelete()
-	{
-	$this->db->query("DELETE FROM `custom_fields_list` where table_id=1 and field_2!='' ");
-	return true;
+	function drawuserDelete(){
+		$this->db->query("DELETE FROM `custom_fields_list` where table_id=1 and field_2!='' ");
+		return true;
 	}
 	
 
@@ -4342,8 +4350,7 @@ function getSubscriptionDays($user_id)
 
 	}
     
-function checkFriendcount($uid,$fid)
-	{	
+function checkFriendcount($uid,$fid){	
 	$sql="select * from friend_list where friend_id=$fid and user_id=$uid";
 	
 	
@@ -4461,19 +4468,19 @@ function checkFriendcount($uid,$fid)
 	if($show_private=='no'){
 		//
 		$sql="Select
-friend_list.id
-From
-member_master
-Inner Join friend_list ON member_master.id = friend_list.friend_id
-Where
-friend_list.user_id = '$uid' AND
-friend_list.approve = 'approved' AND
-member_master.mem_type != '3'";
-// member_type of private member =3.
+	friend_list.id
+	From
+	member_master
+	Inner Join friend_list ON member_master.id = friend_list.friend_id
+	Where
+	friend_list.user_id = '$uid' AND
+	friend_list.approve = 'approved' AND
+	member_master.mem_type != '3'";
+	// member_type of private member =3.
 
-}else{
+	}else{
 	$sql = "select a.id from `friend_list` a where a.user_id='$uid' and a.approve='approved'";
-}
+	}
 		//print_r($sql);exit;
 		$RS = $this->db->get_results($sql,ARRAY_A);
 		return count($RS);
@@ -5667,7 +5674,7 @@ member_master.mem_type != '3'";
 
 	$qry		=	"select  A.*,count(A.userid) as Num ,B.username,B.id as user_id  from media_favorites A,member_master B where A.userid=B.id  group by A.userid";
 	$rs 		= 	$this->db->get_results_pagewise($qry, $pageNo, $limit, $params, $output, $orderBy);
-//print_r($rs);
+	//print_r($rs);
 	return $rs;
 	}
 
@@ -6196,7 +6203,7 @@ member_master.mem_type != '3'";
 		      m.id=ma.user_id and ma.addr_type='master' left join country_master c 
 			  ON(ma.country = c.country_id) $join_qry WHERE m.mem_type='$type'";
 		$RS = $this->db->get_results($sql,ARRAY_A);
-	// print_r($sql);
+		// print_r($sql);
 		return $RS[0];
 	}
 	

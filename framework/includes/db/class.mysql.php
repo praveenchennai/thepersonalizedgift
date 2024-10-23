@@ -248,7 +248,7 @@ class DB
         // If there is an error then take note of it..
         if ( $str = @mysql_error($this->dbh) )
         {
-            print_r($str);
+            //print_r($str);
             $is_insert = true;
             $this->register_error($str);
             $this->show_errors ? trigger_error($str.'<br><b>Query</b>: '.$query.'<br>' ,E_USER_WARNING) : null;
